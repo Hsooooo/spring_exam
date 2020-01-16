@@ -12,7 +12,7 @@ public class TestController {
 	
 	@RequestMapping("/main.do")
 	public String main() {
-		return "main";
+		return "index";
 	}
 	
 }

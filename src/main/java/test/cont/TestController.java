@@ -10,7 +10,7 @@ public class TestController {
 		return "test";
 	}
 	
-	@RequestMapping("/main")
+	@RequestMapping("/main.do")
 	public String main() {
 		return "main";
 	}

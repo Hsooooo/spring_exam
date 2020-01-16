@@ -9,4 +9,10 @@ public class TestController {
 	public String test() {
 		return "test";
 	}
+	
+	@RequestMapping("/main")
+	public String main() {
+		return "main";
+	}
+	
 }

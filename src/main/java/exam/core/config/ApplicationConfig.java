@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan("exam.*")
-@PropertySource("classpath:default.properties")
+@PropertySource("classpath:db.properties")
 public class ApplicationConfig extends WebMvcConfigurerAdapter {
 	
 	@Override

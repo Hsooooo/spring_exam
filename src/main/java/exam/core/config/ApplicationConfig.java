@@ -8,12 +8,14 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import exam.user.util.DownloadView;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("exam.*")
-@PropertySource("classpath:db.properties")
 public class ApplicationConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
@@ -26,7 +28,22 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setPrefix("/WEB-INF/view/");
 		viewResolver.setSuffix(".jsp");
+		viewResolver.setOrder(1);
 		return viewResolver;
+	}
+	@Bean
+	public BeanNameViewResolver downloadViewResolver() {
+		BeanNameViewResolver downloadViewResolver = new BeanNameViewResolver();
+		downloadViewResolver.setOrder(0);
+		
+		return downloadViewResolver;
+	}
+	
+	@Bean
+	public DownloadView download() {
+		DownloadView download = new DownloadView();
+		download.Download();
+		return download;
 	}
 	
 	@Override

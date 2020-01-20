@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam.stock.dao.StockDao">
+	<select id="getStockList" resultType="exam.stock.dto.StockDto" parameterType="java.util.Map">
+		SELECT TICKER_CODE
+		 , COMP_NAME
+		 , INDUSTRY_CODE
+		 , INDUSTRY
+		 , SHARES_COUNT
+		 , CAPITAL
+		 , FACE_VALUE
+		 , CURRENCY_DIVISION
+		 , DELEGATE_CALL
+		 , COMP_ADDR
+		 , GUBUN_CODE
+	  FROM STOCK_INFO
+	 WHERE 1=1
+	   AND GUBUN_CODE = '1'
+	</select>
+</mapper>
+

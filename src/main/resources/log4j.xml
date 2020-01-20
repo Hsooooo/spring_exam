@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4j 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
  
     <!-- 콘솔 로그 -->
-    <appender name="infoConsole" class="org.apache.log4j.ConsoleAppender">
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="[%5p] %d{hh\:mm s} (%F\:%L) %c{1}.%M \: %m%n" />
+    <appender name="infoConsole" class="org.apache.log4j.ConsoleAppender">		<!-- 콘솔에 찍는 로그 설정 (org.apache.log4j.ConsoleAppender) -->
+    	<param name="Target" value="System.out"/>								<!-- System.out 으로 찍히는 모든것 -->
+        <layout class="org.apache.log4j.PatternLayout">							<!-- 로그 패턴 설정 -->
+            <param name="ConversionPattern" value="[%5p] %d{hh\:mm s} (%F\:%L) %c{1}.%M \: %m%n" />		<!-- 이건 모름 -->
+            <!-- <param name="ConversionPattern" value="%d{hh\:mm s} (%F\:%L) %c{1}.%M \: %m%n" /> -->
         </layout>  
     </appender>
     
-    <appender name="dailyFileLog" class="org.apache.log4j.RollingFileAppender">
-    	<param name="file" value="C:/logs/test.log"/>
-    	<layout class="org.apache.log4j.PatternLayout">
+    <appender name="dailyFileLog" class="org.apache.log4j.DailyRollingFileAppender">	<!-- 파일로 찍을때의 설정 (org.apache.log4j.DailyRollingFileAppender) -->
+    	<param name="File" value="/logs/log.log"/>									<!-- 로그 경로 및 파일 명 설정(서버 실행중 오류뜨면 보통 권한 문제이니까 경로 다른곳으로 설정 -->
+    	<param name="Append" value="true"/>												<!-- 내용 덮어씌우기 설정 -->
+    	<param name="dataPattern" value=".yyyy-MM-dd"/>									<!-- 기억안남 -->
+    	<layout class="org.apache.log4j.PatternLayout">									<!-- 패턴 설정 -->
     		<param name="ConversionPattern" value="[%5p] %d{hh\:mm s} (%F\:%L) %c{1}.%M \: %m%n" />
     	</layout>
     </appender>
     
+    <logger name="exam.user">				<!-- 로그 찍을 대상의 패키지? exam.user 아래에서 찍는 모든 것 -->
+    	<level value="DEBUG"/>				<!-- 로그 레벨 설정 (FATAL,ERROR, WARN, INFO, DEBUG, TRACE) 순 왼쪽이 더 높은 레벨 ex) info로 찍은 로그는 설정파일에서 WARN으로 설정시 안찍혀나옴 -->
+    	
+    </logger>
+    
     <!-- root 설정 -->
     <root>
-        <level value="INFO" />
-        <appender-ref ref="infoConsole" />
-        <appender-ref ref="dailyFileLog"/>
+        <priority value="WARN" />			<!-- priority 는  root 에서만 쓰는 레벨 설정같음 -->
+        <appender-ref ref="infoConsole" />	<!-- 대상 어펜더 네임 설정 -->
+        <appender-ref ref="dailyFileLog"/>  <!-- dailyFileLog는 위에 설정한 로그를 파일로 찍기 위한 어펜더 네임이니 파일에는 설정된 INFO레벨 위의 로그만 출력 -->
     </root>
     
    

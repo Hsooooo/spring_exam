@@ -1,4 +1,4 @@
-package exam.user.dto;
+package exam.user;
 
 public class UserInfoDTO {
 	private int user_no;

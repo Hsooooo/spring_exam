@@ -9,16 +9,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
-  <title>SB Admin - Login</title>
-
+  <title>SB Admin - Join</title>
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+  <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	// 회원가입완료 버튼을 눌렀을 때 
+	$('#finishJoinBtn').click(function(){
+		var name = $('#name').val();
+		var email = $('#email').val();
+		var pwd = $('#pwd').val();
+		var repwd = $('#repwd').val();
+		if(name.trim()==""){
+			alert("성함 입력하세요.")
+			$('#name').focus();
+		}
+		else if(email.trim()==""){
+			alert("email 입력하세요.")
+			$('#email').focus();
+		}
+		else if(pwd.trim()==""){
+			alert("Password 입력하세요.")
+			$('#pwd').focus();
+		}
+		else if(repwd.trim()==""){
+			alert("Password 중복체크 확인하세요.")
+			$('#repwd').focus();
+		}
+		// email 중복체크 
+		$.ajax({
+			type:'post',
+			url:'../main/join_ok.do',
+			date:{email:email},
+			success:function(res){
+				
+			}
+		});
+		
+	});
+	
+});  
+</script>
 </head>
 
 <body class="bg-gradient-primary">
@@ -38,31 +73,25 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Welcome Join!</h1>
                   </div>
                   <form class="user">
-                    <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="ID 입력하세요.">
+                  	<div class="form-group">
+                      <input type="name" class="form-control form-control-user" id="name" name=name placeholder="성함을 입력해주세요. ">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="PASSWORD 입력하세요.">
+                      <input type="text" class="form-control form-control-user" id="email"  aria-describedby="emailHelp" placeholder="귀하의 email 입력하세요.">
+                      <font size="1px" id="pwdCondition"></font>
                     </div>
                     <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
+                      <input type="password" class="form-control form-control-user" id="pwd" placeholder="사용 하실 Password 입력하세요.">
+                      <font size="1px" id="pwdCondition"></font>
+                    </div><div class="form-group">
+                      <input type="password" class="form-control form-control-user" id="repwd" placeholder="다시 Password 입력하세요.">
+                      <font size="1px" id="pwdCondition"></font>
                     </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
-                    <hr>
-                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                      <i class="fab fa-google fa-fw"></i> Login with Google
-                    </a>
-                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                      <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                    </a>
+                    <input type=button class="btn btn-primary btn-user btn-block" id="finishJoinBtn" value="Finish JOIN ~!"/>
+                    
                   </form>
                   <hr>
                   <div class="text-center">

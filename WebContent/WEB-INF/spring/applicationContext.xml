@@ -13,5 +13,5 @@
 	
 	<mvc:resources location="/resources/" mapping="resources/**"/>
 	
-	<bean class="test.cont.TestController" id="testController"></bean>
+	<bean class="exam.user.UserController" id="UserController"></bean>
 </beans>

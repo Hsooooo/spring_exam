@@ -25,10 +25,10 @@ public class DatabaseConfiguration {
 	@Bean
 	public DriverManagerDataSource dataSource() {
 		DriverManagerDataSource source = new DriverManagerDataSource();
-		source.setDriverClassName(env.getProperty("db.className"));
-		source.setUrl(env.getProperty("db.url"));
-		source.setUsername(env.getProperty("db.username"));
-		source.setPassword(env.getProperty("db.password"));
+		source.setDriverClassName(env.getProperty("driver"));
+		source.setUrl(env.getProperty("url"));
+		source.setUsername(env.getProperty("username"));
+		source.setPassword(env.getProperty("password"));
 		
 		return source;
 	}

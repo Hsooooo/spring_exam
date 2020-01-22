@@ -1,11 +1,22 @@
 package exam.user;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserController {
+	
+	private Logger log = LoggerFactory.getLogger(getClass());
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/main.do")
 	public String main(Model model) {
@@ -24,15 +35,31 @@ public class UserController {
 	}
 	//email중복체크 
 	@RequestMapping("/join_ok.do")
-	public String join_ok(String email,Model model) {
+	public String join_ok(HttpServletRequest request,HttpServletResponse response,Model model) {
+		String user_email = (String)request.getParameter("email");
+		String result = userService.userEmailYn(user_email);
+		System.out.println(result);
 		
-		return "../main/join_ok.jsp";
+		model.addAttribute("result", result);
+		return "main/join_ok";
 	}
+	
 	//로그인
 	@RequestMapping("/login.do")
-	public String login(String id,String pwd,Model model) {
+	public String login() {
 		return "main/login";
 	}
+	//
+	@RequestMapping("/login_ok.do")
+	public String login_ok(HttpServletRequest request,HttpServletResponse response,Model model) {
+		String user_email = (String)request.getParameter("email");
+		log.info("컨트롤"+user_email);
+		String result = userService.userEmailYn(user_email);
+		log.info("R:"+result);
+		model.addAttribute("result", result);
+		return "main/login_ok";
+	}
+	
 	//비밀번호찾기
 	@RequestMapping("/forgot-password.do")
 	public String forgotPassword() {

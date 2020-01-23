@@ -38,7 +38,6 @@ public class UserController {
 	public String join_ok(HttpServletRequest request,HttpServletResponse response,Model model) {
 		String user_email = (String)request.getParameter("email");
 		String result = userService.userEmailYn(user_email);
-		System.out.println(result);
 		
 		model.addAttribute("result", result);
 		return "main/join_ok";

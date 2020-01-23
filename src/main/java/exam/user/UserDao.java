@@ -11,6 +11,6 @@ public class UserDao {
 	SqlSession sqlSession;
 	
 	public int userEmailYn(String user_email) {
-		return (Integer)sqlSession.selectOne("userEmailYn");
+		return (Integer)sqlSession.selectOne("userEmailYn",user_email);
 	};
 }

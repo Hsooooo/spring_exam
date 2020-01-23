@@ -3,15 +3,15 @@
 <mapper namespace="exam.user.UserMapper">
 
 	<!-- 이메일 유무 -->
-	<select id="userEmailYn" parameterType="int" resultType="java.lang.String">
-		SELECT COUNT(*) > 0
+	<select id="userEmailYn" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT COUNT(*)
 		  FROM USER_BASIC_INFO 
 		 WHERE USER_EMAIL = #{ user_email }
 	</select>
 	
 	<!-- 가입 -->
 	<insert id="insertUserInfo" parameterType="exam.user.UserInfoDTO">
-	<selectKey keyProperty="user_no" resultType="int" order="BEFORE">
+	<selectKey keyProperty="user_no" resultType="java.lang.Integer" order="BEFORE">
 		SELECT NVL(MAX(USER_NO)+1,1) AS USER_NO FROM USER_BASIC_INFO
 	</selectKey>
 		INSERT INTO USER_BASIC_INFO(

@@ -35,12 +35,10 @@ $(function(){
 			url:'/login_chk.do',
 			data:{email:email},
 			success:function(res){
-				alert(res);
 				if(res.trim() == 0){
 					alert("회원가입 후 이용해주세요.");
 					return;
 				}else{
-					alert("가입자");
 					$.ajax({
 						type:'post',
 						url:'/login_ok.do',

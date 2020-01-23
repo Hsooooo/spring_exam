@@ -37,9 +37,7 @@ public class UserController {
 	@RequestMapping("/join_ok.do")
 	public String join_ok(HttpServletRequest request,HttpServletResponse response,Model model) {
 		String user_email = (String)request.getParameter("email");
-		String result = userService.userEmailYn(user_email);
 		
-		model.addAttribute("result", result);
 		return "main/join_ok";
 	}
 	
@@ -55,8 +53,9 @@ public class UserController {
 		log.info("컨트롤"+user_email);
 		String result = userService.userEmailYn(user_email);
 		log.info("R:"+result);
+		
 		model.addAttribute("result", result);
-		return "main/login_ok";
+		return "login_ok"; /////한수씨........값 넘기는 거ㅓ...도와주세엽,,,,ㅠㅠㅠㅠ
 	}
 	
 	//비밀번호찾기

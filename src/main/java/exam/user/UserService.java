@@ -20,9 +20,9 @@ public class UserService {
 		countEmail = userDao.userEmailYn(user_email);
 		log.info("서비스"+user_email);
 		if(countEmail > 0) { //이메일 존재
-			result = "존재";
+			result = "1";
 		}else {
-			result = "미존재";
+			result = "0";
 		}
 		return result;
 	}

@@ -20,27 +20,34 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	//메인
 	@RequestMapping("/main.do")
 	public String main(Model model) {
 		model.addAttribute("main_jsp", "../main/main1.jsp");
 		return "main/main";
-	}
-	//게시판
-	@RequestMapping("/board.do")
-	public String board(Model model) {
-		return "main/board";
 	}
 	//회원가입
 	@RequestMapping("/join.do")
 	public String join() {
 		return "main/join";
 	}
-	//email중복체크 
+	
+	//이메일중복체크
 	@RequestMapping("/join_ok.do")
+	@ResponseBody
 	public String join_ok(HttpServletRequest request,HttpServletResponse response,Model model) {
 		String user_email = (String)request.getParameter("email");
+		log.info("이메일: "+user_email);
+		String result = userService.userEmailYn(user_email);
+		log.info("중복체크: "+result);
 		
-		return "main/join_ok";
+		return result;
+	}
+	
+	//회원가입
+	@RequestMapping("/insert.do")
+	public String insertUser() {
+		return "";
 	}
 	
 	//로그인
@@ -53,9 +60,9 @@ public class UserController {
 	@ResponseBody
 	public String login_chk(HttpServletRequest request,HttpServletResponse response) {
 		String user_email = (String)request.getParameter("email");
-		log.info("컨트롤"+user_email);
+		//log.info("컨트롤"+user_email);
 		String result = userService.userEmailYn(user_email);
-		log.info("R:"+result);
+		//log.info("R:"+result);
 		
 		return result;
 	}

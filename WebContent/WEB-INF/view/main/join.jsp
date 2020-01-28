@@ -18,12 +18,52 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	// 회원가입완료 버튼을 눌렀을 때 
+	var name = $('#name').val();
+	var email = $('#email').val();
+	var pwd = $('#pwd').val();
+	var repwd = $('#repwd').val();
+	
+	$('#email').keyup(function(){
+		var email = $('#email').val();
+		var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if(!email.match(emailRule)){
+			$('#emailChk').text("▶ email형식에 맞지않습니다.");
+			$('#emailChk').css("color","red");
+		}else {
+			$.ajax({
+				type:'post',
+				url:'/join_ok.do',
+				date:{email:email},
+				success:function(res){
+					alert("오니?");
+					var count = res.trim();
+					if(count > 0){
+						$('#emailChk').text("▶ 사용중인 이메일입니다.");
+						$('#emailChk').css("color","red");
+						$('#email').focus();
+						return;
+					}else{
+						$('#emailChk').text("▶ 사용가능한 email입니다.");
+						$('#emailChk').css("color","blue");
+						$('#pwd').focus();
+						return;
+					}
+				}
+			});
+		}
+	});
+	
+	
+	$('#repwd').keyup(function(){
+		
+	});
+
 	$('#finishJoinBtn').click(function(){
 		var name = $('#name').val();
 		var email = $('#email').val();
 		var pwd = $('#pwd').val();
 		var repwd = $('#repwd').val();
+		
 		if(name.trim()==""){
 			alert("성함 입력하세요.")
 			$('#name').focus();
@@ -37,20 +77,20 @@ $(function(){
 			$('#pwd').focus();
 		}
 		else if(repwd.trim()==""){
-			alert("Password 중복체크 확인하세요.")
+			alert("필수 입력 누락");
 			$('#repwd').focus();
 		}
-		// email 중복체크 
+		
 		$.ajax({
 			type:'post',
-			url:'../main/join_ok.do',
-			date:{email:email},
+			url:'/insert.do',
+			date:{name:name,email:email,pwd:pwd},
 			success:function(res){
 				
 			}
 		});
-		
 	});
+	
 	
 });  
 </script>
@@ -81,17 +121,16 @@ $(function(){
                     </div>
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" id="email"  aria-describedby="emailHelp" placeholder="귀하의 email 입력하세요.">
-                      <font size="1px" id="pwdCondition"></font>
+                      <font size="1px" id="pwdChk">&emsp;&emsp;                        </font>
+                      <input type=button class="btn btn-primary btn-user " id="emailChk" value="체크"/>
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="pwd" placeholder="사용 하실 Password 입력하세요.">
-                      <font size="1px" id="pwdCondition"></font>
                     </div><div class="form-group">
                       <input type="password" class="form-control form-control-user" id="repwd" placeholder="다시 Password 입력하세요.">
-                      <font size="1px" id="pwdCondition"></font>
+                      <font size="1px" id="pwdChk">&emsp;&emsp;</font>
                     </div>
                     <input type=button class="btn btn-primary btn-user btn-block" id="finishJoinBtn" value="Finish JOIN ~!"/>
-                    
                   </form>
                   <hr>
                   <div class="text-center">

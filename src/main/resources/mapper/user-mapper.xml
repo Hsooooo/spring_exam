@@ -10,7 +10,7 @@
 	</select>
 	
 	<!-- 가입 -->
-	<insert id="insertUserInfo" parameterType="exam.user.UserInfoDTO">
+	<insert id="insertUser" parameterType="exam.user.UserInfoDTO">
 	<selectKey keyProperty="user_no" resultType="java.lang.Integer" order="BEFORE">
 		SELECT NVL(MAX(USER_NO)+1,1) AS USER_NO FROM USER_BASIC_INFO
 	</selectKey>
@@ -18,15 +18,13 @@
 			USER_NO,
 			USER_NAME,
 			USER_EMAIL,
-			USER_PWD,
-			USER_BIRTH
+			USER_PWD
 		)
 		VALUES(
 			#{user_no},
 			#{user_name},
 			#{user_email},
-			#{user_pwd},
-			#{user_birth}
+			#{user_pwd}
 		)
 	</insert>
 	

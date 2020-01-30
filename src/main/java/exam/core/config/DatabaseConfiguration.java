@@ -13,12 +13,19 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+/*
+ * Configuration -> 이것이 설정파일이다!
+ * PropertySource -> 읽어들일 prop 파일
+ */
+
 @Configuration
 @PropertySource("classpath:db.properties")
 public class DatabaseConfiguration {
+	//요건 왜 쓰는지 모르겟지만 일단 쓰래
 	@Autowired
 	private ApplicationContext applicationContext;
 	
+	//이건 상단 PropertySource로 가져온 파일을 환경파일로 읽어들일때 쓰는건가..
 	@Autowired
 	Environment env;
 	

@@ -23,13 +23,14 @@ $(function(){
 	var pwd = $('#pwd').val();
 	var repwd = $('#repwd').val();
 	
-	$('#email').keyup(function(){
+	$('#emailChkBtn').click(function(){
 		var email = $('#email').val();
 		var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		if(!email.match(emailRule)){
-			$('#emailChk').text("▶ email형식에 맞지않습니다.");
-			$('#emailChk').css("color","red");
+			alert("▶ email형식에 맞지않습니다.");
 		}else {
+			alert(email);
+			
 			$.ajax({
 				type:'post',
 				url:'/join_ok.do',
@@ -38,21 +39,19 @@ $(function(){
 					alert("오니?");
 					var count = res.trim();
 					if(count > 0){
-						$('#emailChk').text("▶ 사용중인 이메일입니다.");
-						$('#emailChk').css("color","red");
+						alert("▶ 사용중인 이메일입니다.");
 						$('#email').focus();
 						return;
 					}else{
-						$('#emailChk').text("▶ 사용가능한 email입니다.");
-						$('#emailChk').css("color","blue");
+						alert("▶ 사용가능한 email입니다.");
 						$('#pwd').focus();
 						return;
 					}
 				}
 			});
+			
 		}
 	});
-	
 	
 	$('#repwd').keyup(function(){
 		
@@ -100,39 +99,44 @@ $(function(){
 
   <div class="container">
 
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-
-      <div class="col-xl-10 col-lg-12 col-md-9">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
-            <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-              <div class="col-lg-6">
-                <div class="p-5">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Join!</h1>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-7">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+              </div>
+              <form class="user">
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="name" placeholder="성함을 입력해주세요. ">
                   </div>
-                  <form class="user">
-                  	<div class="form-group">
-                      <input type="name" class="form-control form-control-user" id="name" name=name placeholder="성함을 입력해주세요. ">
-                    </div>
-                    <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="email"  aria-describedby="emailHelp" placeholder="귀하의 email 입력하세요.">
-                      <font size="1px" id="pwdChk">&emsp;&emsp;                        </font>
-                      <input type=button class="btn btn-primary btn-user " id="emailChk" value="체크"/>
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="pwd" placeholder="사용 하실 Password 입력하세요.">
-                    </div><div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="repwd" placeholder="다시 Password 입력하세요.">
-                      <font size="1px" id="pwdChk">&emsp;&emsp;</font>
-                    </div>
-                    <input type=button class="btn btn-primary btn-user btn-block" id="finishJoinBtn" value="Finish JOIN ~!"/>
-                  </form>
-                  <hr>
+                  <div class="col-sm-6">
+                    <!-- <input type="button" class="form-control form-control-user" id="exampleLastName" value="Chk"> -->
+                  </div>
+                </div><div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" id="email" placeholder="Email을 입력해주세요. ">
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="button" class="form-control form-control-user" id="emailChkBtn" value="Chk">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="password" class="form-control form-control-user" id="pwd" placeholder="Password 입력해주세요.">
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="password" class="form-control form-control-user" id="repwd" placeholder="다시 password 입력해주세요. ">
+                  </div>
+                </div>
+                <input type=button class="btn btn-primary btn-user btn-block" id="finishJoinBtn" value="Finish JOIN ~!"/>
+                
+              </form>
+              <hr>
                   <div class="text-center">
                     <a class="small" href="join.do">Are you Join?</a>
                   </div>
@@ -145,14 +149,10 @@ $(function(){
                   <div class="text-center">
                     <a class="small" href="main.do">MainPage Let's GO!</a>
                   </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
 
   </div>

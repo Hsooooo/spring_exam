@@ -16,7 +16,8 @@ public class UserDao {
 		return (Integer)sqlSession.selectOne("userEmailYn",user_email);
 	}
 	
-	public void insertUser(Map<String, String> paramMap) {
-		sqlSession.selectList("insertUser", paramMap);
+	public int insertUser(Map<String, String> paramMap) {
+		return sqlSession.insert("insertUser", paramMap);
+		
 	}
 }

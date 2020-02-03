@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class BoardController {
-/*	@Autowired
+	@Autowired
 	private BoardService boardService;
 	
 	@RequestMapping("/board_list.do")
@@ -18,5 +18,5 @@ public class BoardController {
 		model.addAttribute("list", list);
 		
 		return "/board/board_list";
-	}*/
+	}
 }

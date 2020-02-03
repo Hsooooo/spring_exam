@@ -9,9 +9,7 @@
 			  ,board_regdate
 			  ,board_hit 
 		  FROM BOARD 
-		 ORDER BY BOARD_NO DESC;
+		 ORDER BY SYSDATE DESC;
 	</select>
-	
-	
 	
 </mapper>

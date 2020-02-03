@@ -26,11 +26,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private BoardService boardService;
-	
-	
+
 	//메인
 	@RequestMapping("/main.do")
 	public String main(Model model,HttpServletRequest request) {
@@ -38,9 +34,6 @@ public class UserController {
 		HttpSession session = request.getSession();
 		session.getAttribute(user_email);
 		
-		List<BoardDTO> list = (List<BoardDTO>)boardService.boardList();
-		
-		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../board/board_list.jsp"); // 메인에 게시판이씀.
 		return "main/main";
 	}

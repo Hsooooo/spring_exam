@@ -1,5 +1,7 @@
 package exam.user;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +28,9 @@ public class UserService {
 		}
 		return result;
 	}
+	
+	public void insertUser(Map<String, String> paramMap) {
+		userDao.insertUser(paramMap);
+	}
+	
 }

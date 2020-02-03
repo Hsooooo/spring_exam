@@ -29,12 +29,7 @@
 	<org.slf4j-version>1.6.6</org.slf4j-version>
   </properties>
   <dependencies>
-  <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
+  
   	<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -52,6 +47,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- RestController -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

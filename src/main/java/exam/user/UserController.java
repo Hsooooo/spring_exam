@@ -1,5 +1,9 @@
 package exam.user;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import exam.board.BoardDTO;
+import exam.board.BoardService;
+
 @Controller
 public class UserController {
 	
@@ -20,10 +27,21 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private BoardService boardService;
+	
+	
 	//메인
 	@RequestMapping("/main.do")
-	public String main(Model model) {
-		model.addAttribute("main_jsp", "../main/main1.jsp");
+	public String main(Model model,HttpServletRequest request) {
+		String user_email = "";
+		HttpSession session = request.getSession();
+		session.getAttribute(user_email);
+		
+		List<BoardDTO> list = (List<BoardDTO>)boardService.boardList();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("main_jsp", "../board/board_list.jsp"); // 메인에 게시판이씀.
 		return "main/main";
 	}
 	//회원가입
@@ -37,17 +55,31 @@ public class UserController {
 	@ResponseBody
 	public String join_ok(HttpServletRequest request,HttpServletResponse response,Model model) {
 		String user_email = (String)request.getParameter("email");
-		log.info("이메일: "+user_email);
+		//log.info("이메일: "+user_email);
 		String result = userService.userEmailYn(user_email);
-		log.info("중복체크: "+result);
+		//log.info("중복체크: "+result);
 		
 		return result;
 	}
 	
 	//회원가입
 	@RequestMapping("/insert.do")
-	public String insertUser() {
-		return "";
+	@ResponseBody
+	public String insertUser(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, String> paramMap = new HashMap<String, String>();
+		
+		String user_name = request.getParameter("name");
+		String user_email = request.getParameter("email");
+		String user_pwd = request.getParameter("pwd");
+		
+		String result = "";
+		paramMap.put("user_name", user_name);
+		paramMap.put("user_email", user_email);
+		paramMap.put("user_pwd", user_pwd);
+		
+		userService.insertUser(paramMap);
+		
+		return result;
 	}
 	
 	//로그인
@@ -71,7 +103,8 @@ public class UserController {
 	public String login_ok(HttpServletRequest request, HttpServletResponse response) {
 		String user_email = (String)request.getParameter("email");
 		HttpSession session = request.getSession();
-		session.setAttribute("email", user_email);
+		session.setAttribute("user_email", user_email);
+		
 		return "main/login";
 	}
 	//로그아웃
@@ -79,7 +112,7 @@ public class UserController {
 	public String logout(HttpServletRequest request, HttpServletResponse response,Model model) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		model.addAttribute("main_jsp", "../main/main1.jsp");
+		model.addAttribute("main_jsp", "../board/board_list.jsp");
 		return "main/main";
 	}
 	//비밀번호찾기

@@ -10,22 +10,16 @@
 	</select>
 	
 	<!-- 가입 -->
-	<insert id="insertUser" parameterType="exam.user.UserInfoDTO">
-	<selectKey keyProperty="user_no" resultType="java.lang.Integer" order="BEFORE">
-		SELECT NVL(MAX(USER_NO)+1,1) AS USER_NO FROM USER_BASIC_INFO
-	</selectKey>
-		INSERT INTO USER_BASIC_INFO(
-			USER_NO,
-			USER_NAME,
-			USER_EMAIL,
-			USER_PWD
-		)
+	<select id="userNoSeq" resultType="String">
+		SELECT USER_SEQ.NEXTVAL FROM DUAL; 
+	</select>
+	<insert id="insertUser" parameterType="java.util.Map">
+		INSERT INTO USER_BASIC_INFO
 		VALUES(
-			#{user_no},
+			USER_SEQ.NEXTVAL,
 			#{user_name},
 			#{user_email},
 			#{user_pwd}
 		)
 	</insert>
-	
 </mapper>

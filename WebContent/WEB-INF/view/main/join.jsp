@@ -18,11 +18,6 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	var name = $('#name').val();
-	var email = $('#email').val();
-	var pwd = $('#pwd').val();
-	var repwd = $('#repwd').val();
-	
 	$('#emailChkBtn').click(function(){
 		var email = $('#email').val();
 		var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -34,7 +29,7 @@ $(function(){
 			$.ajax({
 				type:'post',
 				url:'/join_ok.do',
-				date:{email:email},
+				data:{email:email},
 				success:function(res){
 					alert("오니?");
 					var count = res.trim();
@@ -42,52 +37,69 @@ $(function(){
 						alert("▶ 사용중인 이메일입니다.");
 						$('#email').focus();
 						return;
-					}else{
+					}else if (count == 0){
 						alert("▶ 사용가능한 email입니다.");
 						$('#pwd').focus();
-						return;
 					}
 				}
 			});
-			
 		}
 	});
 	
-	$('#repwd').keyup(function(){
-		
-	});
 
 	$('#finishJoinBtn').click(function(){
 		var name = $('#name').val();
 		var email = $('#email').val();
-		var pwd = $('#pwd').val();
-		var repwd = $('#repwd').val();
+		var pwd = $('#pwd').val().trim();
+		var repwd = $('#repwd').val().trim();
+		var pwdRule = /[a-z]+[0-9]/; //영문소문자+숫자 조합
 		
-		if(name.trim()==""){
+		if(name ==""){
 			alert("성함 입력하세요.")
 			$('#name').focus();
+			return;
 		}
-		else if(email.trim()==""){
+		else if(email ==""){
 			alert("email 입력하세요.")
 			$('#email').focus();
+			return;
 		}
-		else if(pwd.trim()==""){
+		else if(pwd ==""){
 			alert("Password 입력하세요.")
 			$('#pwd').focus();
+			return;
 		}
-		else if(repwd.trim()==""){
+		else if(repwd ==""){
 			alert("필수 입력 누락");
 			$('#repwd').focus();
+			return;
+		}
+		else if( !(pwd.length >= 6 && pwd.length <= 16 ) ){
+			alert("6~16자로 입력하세요.");
+			$('#pwd').focus();
+			return;
+		} 
+		else if(!pwd.match(pwdRule)){
+			alert("영문 소문자+숫자 조합으로 입력하세요.");
+			$('#pwd').focus();
+			return;
+		} 
+		else if(!pwd.match(repwd)){
+			alert("동일하게 입력하세요.");
+			$('#repwd').focus();
+			return;
 		}
 		
-		$.ajax({
+		
+ 		$.ajax({
 			type:'post',
 			url:'/insert.do',
-			date:{name:name,email:email,pwd:pwd},
+			data:{name:name,email:email,pwd:pwd},
 			success:function(res){
-				
+				alert("회원가입완료되었습니다.");
+				location.href="/main.do";
 			}
-		});
+		}); 
 	});
 	
 	

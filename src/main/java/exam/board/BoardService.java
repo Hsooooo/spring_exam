@@ -15,8 +15,9 @@ public class BoardService {
 	@Autowired
 	private BoardDAO boardDao;
 	
-	public List<BoardDTO> boardList() {
-		return boardDao.boardList();
+	public List<BoardDTO> boardList(int start,int end) {
+		
+		return boardDao.boardList(start, end);
 	}
 	
 }

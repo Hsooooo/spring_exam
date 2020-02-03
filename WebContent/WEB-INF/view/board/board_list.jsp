@@ -47,24 +47,24 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>게시물번호</th>
-                      <th>제목</th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회수</th>
+                      <th class="text-center"  width="15%">게시물번호</th>
+                      <th class="text-center"  width="35%">제목</th>
+                      <th class="text-center"  width="15%">작성자</th>
+                      <th class="text-center"  width="25%">작성일</th>
+                      <th class="text-center"  width="10%">조회수</th>
                     </tr>
                   </thead>
-                  <c:forEach var="list" items="${list }" >
                   <tbody>
+                  <c:forEach var="list" items="${list }" >
                     <tr>
-                      <td>${list.board_no }</td>
+                      <td class="text-center" width="10%">${list.board_no }</td>
                       <td>${list.board_subject }</td>
                       <td>신다울</td>
                       <td>${list.board_regdate }</td>
                       <td>${list.board_hit }</td>
                     </tr>
+                    </c:forEach>
                   </tbody>
-                  </c:forEach>
                   <tfoot>
                     <tr>
                       <th>게시물번호</th>
@@ -77,6 +77,26 @@
                   
                 </table>
               </div>
+            </div>
+            <div class="row">
+            	<div class="col-sm-12 col-md-5">
+            		<div class="dataTables_info" id="dataTable-info" role="statis" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+            	</div>
+            	<div class="col-sm-12 col-md-7">
+            		<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+            			<ul class="pagination">
+            				<li class="pagination">
+            					<a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+            				</li>
+            				<li class="paginate_button page-item active">
+            					<a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+            				</li>
+            				<li class="paginate_button page-item next" id="dataTable_next">
+            					<a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+            				</li>
+            			</ul>
+            		</div>
+            	</div>
             </div>
           </div>
 		</div>

@@ -26,14 +26,29 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BoardService boardService;
 
 	//메인
 	@RequestMapping("/main.do")
-	public String main(Model model,HttpServletRequest request) {
+	public String main(Model model,HttpServletRequest request,String page) {
 		String user_email = "";
 		HttpSession session = request.getSession();
 		session.getAttribute(user_email);
 		
+		//게시판 
+		if(page == null) {
+			page = "1";
+		}
+		int curpage = Integer.parseInt(page);
+		int rowSize = 5;
+		int start = (curpage * rowSize)-(rowSize-1);
+		int end = (curpage * rowSize);
+		
+		List<BoardDTO> list = (List<BoardDTO>)boardService.boardList(start, end);
+		
+		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../board/board_list.jsp"); // 메인에 게시판이씀.
 		return "main/main";
 	}

@@ -13,12 +13,11 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800"></h1>
-          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              <h6 class="m-0 font-weight-bold text-primary">SB 게시판</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -44,10 +43,13 @@
               					<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
               				</label>
               			</div>
+              			<div class="col-sm-12 col-md-12">
+            				<a href="/board_insert.do" aria-controls="dataTable" data-dt-idx="12" tabindex="0" class="page-link">쓰기</a>
+              			</div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th class="text-center"  width="15%">게시물번호</th>
+                      <th class="text-center"  width="15%" >게시물번호</th>
                       <th class="text-center"  width="35%">제목</th>
                       <th class="text-center"  width="15%">작성자</th>
                       <th class="text-center"  width="25%">작성일</th>
@@ -57,37 +59,26 @@
                   <tbody>
                   <c:forEach var="list" items="${list }" >
                     <tr>
-                      <td class="text-center" width="10%">${list.board_no }</td>
-                      <td>${list.board_subject }</td>
-                      <td>신다울</td>
-                      <td>${list.board_regdate }</td>
-                      <td>${list.board_hit }</td>
+                    	<td class="text-center" width="10%"><a href="/board_detail.do?no=${list.board_no }">${list.num }</a></td>
+                    	<td><a href="/board_detail.do?no=${list.board_no }">${list.board_subject }</a></td>
+                    	<td><a href="/board_detail.do?no=${list.board_no }">${list.board_name }</a></td>
+                    	<td><a href="/board_detail.do">${list.today }</a></td>
+                    	<td><a href="/board_detail.do">${list.board_hit }</a></td>
                     </tr>
                     </c:forEach>
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>게시물번호</th>
-                      <th>제목</th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회수</th>
-                    </tr>
-                  </tfoot>
                   
                 </table>
               </div>
             </div>
             <div class="row">
-            	<div class="col-sm-12 col-md-5">
-            		<div class="dataTables_info" id="dataTable-info" role="statis" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-            	</div>
             	<div class="col-sm-12 col-md-7">
             		<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
             			<ul class="pagination">
             				<li class="pagination">
             					<a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
             				</li>
+            				
             				<li class="paginate_button page-item active">
             					<a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
             				</li>

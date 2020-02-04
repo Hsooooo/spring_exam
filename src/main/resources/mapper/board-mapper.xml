@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="exam.board.BoardMapper">
+
+	<select id="boardCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM BOARD;
+	</select>
 	
 	<select id="boardList" resultType="exam.board.BoardDTO" parameterType="java.lang.Integer">
 		SELECT board_no
+			  ,board_name
               ,board_subject
               ,board_content
               ,today
@@ -11,6 +16,7 @@
               ,num
           FROM (
           		SELECT board_no
+          			  ,board_name
           		      ,board_subject
           		      ,board_content
           		      ,TO_CHAR(board_regdate,'YYYY-MM-DD') AS today
@@ -18,6 +24,7 @@
           		      ,rownum as num
             	  FROM (
             	  		SELECT board_no
+            	  		 	  ,board_name
             	  		      ,board_subject
             	  		      ,board_content
             	  		      ,board_regdate
@@ -26,7 +33,10 @@
                          ORDER BY board_regdate DESC
                         ) 
                )
-         WHERE num BETWEEN #{start} AND #{end}
+         WHERE num BETWEEN #{ start } AND #{ end }
 	</select>
 	
+	<select id="boardDetail" resultType="exam.board.BoardDTO" parameterType="java.lang.Integer">
+		SELECT * FROM BOARD WHERE BOARD_NO = #{ board_no }
+	</select>
 </mapper>

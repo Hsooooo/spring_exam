@@ -33,25 +33,31 @@ public class UserController {
 	//메인
 	@RequestMapping("/main.do")
 	public String main(Model model,HttpServletRequest request,String page) {
-		String user_email = "";
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		String email = "";
 		HttpSession session = request.getSession();
-		session.getAttribute(user_email);
+		session.getAttribute(email);
 		
 		//게시판 
 		if(page == null) {
 			page = "1";
 		}
-		int curpage = Integer.parseInt(page);
+		int curPage = Integer.parseInt(page);
 		int rowSize = 5;
-		int start = (curpage * rowSize)-(rowSize-1);
-		int end = (curpage * rowSize);
+		int start = (curPage * rowSize) - (rowSize - 1);
+		int end = (curPage * rowSize);
 		
-		List<BoardDTO> list = (List<BoardDTO>)boardService.boardList(start, end);
+		paramMap.put("start", start);
+		paramMap.put("end", end);
+		
+		List<BoardDTO> list = (List<BoardDTO>)boardService.boardList(paramMap);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../board/board_list.jsp"); // 메인에 게시판이씀.
 		return "main/main";
 	}
+	
 	//회원가입
 	@RequestMapping("/join.do")
 	public String join() {
@@ -63,9 +69,7 @@ public class UserController {
 	@ResponseBody
 	public String join_ok(HttpServletRequest request,HttpServletResponse response,Model model) {
 		String user_email = (String)request.getParameter("email");
-		//log.info("이메일: "+user_email);
 		String result = userService.userEmailYn(user_email);
-		//log.info("중복체크: "+result);
 		
 		return result;
 	}
@@ -111,7 +115,7 @@ public class UserController {
 	public String login_ok(HttpServletRequest request, HttpServletResponse response) {
 		String user_email = (String)request.getParameter("email");
 		HttpSession session = request.getSession();
-		session.setAttribute("user_email", user_email);
+		session.setAttribute("email", user_email);
 		
 		return "main/login";
 	}

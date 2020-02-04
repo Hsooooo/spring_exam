@@ -8,6 +8,28 @@ public class BoardDTO {
 	private String board_content;
 	private Date board_regdate;
 	private int board_hit;
+	private String today;
+	private String board_name;
+	
+	public String getBoard_name() {
+		return board_name;
+	}
+	public void setBoard_name(String board_name) {
+		this.board_name = board_name;
+	}
+	public String getToday() {
+		return today;
+	}
+	public void setToday(String today) {
+		this.today = today;
+	}
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
+	}
+	private String num;
 	
 	public int getBoard_no() {
 		return board_no;

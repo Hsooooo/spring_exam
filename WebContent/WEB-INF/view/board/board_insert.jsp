@@ -1,39 +1,59 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+/* $(function(){
+	$('#insertBtn').click(function(){
+		//alert("ë„Œí´ë¦­ì´ë¬ë‹ˆ?");
+		var subject = $('#sub').val();
+		var content = $('#cont').val();
+		$.ajax({
+			type:'post',
+			url:'/board_insert_ok.do',
+			data:{subject:subject,content:content},
+			success:function(res){
+				
+				location.href='/main.do';	
+			}				
+		});
+	});
+}); */
+</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="text-center">°øÁö ¾²±â</h2>
+		<h2 class="text-center">ì‘ì„± ì¤‘ .. </h2>
 		<div class="row">
-			<form method="post" action="noticeboard_insert_ok.do">
+			<form method="post" action="/board_insert_ok.do" >
 				<table class="table">
 					<tr>
-						<th class="text-right info" width="20%">°ü¸®ÀÚ¸í</th>
+						<th class="text-right info" width="20%">ê¸€ì“´ì´</th>
 						<td width="80%" class="text-left">
-							<input type="text" name="id" size="15" class="input-sm" value="${id }" readonly="readonly" id="id">
+							<input type="text" size="25" class="input-sm" value="${email }" placeholder=" ${email }" readonly="readonly" id="email" name="email">
 						</td>
 					</tr>
 					<tr>
-					<th class="text-right info" width="20%">Á¦¸ñ</th>
+					<th class="text-right info" width="20%">ì œëª©</th>
 						<td width="80%" class="text-left">
-							<input type="text" name="subject" size="60" class="input-sm" id="sub">
+							<input type="text" name="subject" size="60" class="input-sm" id="sub" name="subject">
 						</td>
 					</tr>
 					<tr>
-					<th class="text-right info" width="20%">³»¿ë</th>
+					<th class="text-right info" width="20%">ë‚´ìš©</th>
 						<td width="80%">
-							<textarea rows="20" cols="105" name="content" id="cont"></textarea>
+							<textarea rows="20" cols="105" name="content" id="cont" ></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2" class="text-center">
-							<input type="button" value="°øÁö µî·Ï" class="btn btn-sm btn-info">
-							<input type="button" value="Ãë¼Ò" class="btn btn-sm btn-danger"
+							<input type="submit" value="ë“±ë¡" class="btn btn-sm btn-info" id="insertBtn">
+							<input type="button" value="ì·¨ì†Œ" class="btn btn-sm btn-danger"
 								onclick="javascript:history.back()"
 							>
 						</td>

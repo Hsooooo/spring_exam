@@ -91,7 +91,7 @@ $(function(){
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <input type=button id="loginBtn" class="btn btn-primary btn-user btn-block" value="Login"/>
+                    <input type=onkeypress id="loginBtn" class="btn btn-primary btn-user btn-block" value="Login"/>
                     <hr>
                     <a href="index.html" class="btn btn-google btn-user btn-block">
                       <i class="fab fa-google fa-fw"></i> Login with Google

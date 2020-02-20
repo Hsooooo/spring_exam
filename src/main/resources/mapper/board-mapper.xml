@@ -7,36 +7,62 @@
 	</select>
 	
 	<select id="boardList" resultType="exam.board.BoardDTO" parameterType="java.lang.Integer">
-		SELECT board_no
-			  ,board_name
-              ,board_subject
-              ,board_content
-              ,today
-              ,board_hit
-              ,num
+		SELECT BOARD_NO
+			  ,BOARD_EMAIL
+              ,BOARD_SUBJECT
+              ,BOARD_CONTENT
+              ,TODAY
+              ,BOARD_HIT
+              ,NUM
           FROM (
-          		SELECT board_no
-          			  ,board_name
-          		      ,board_subject
-          		      ,board_content
-          		      ,TO_CHAR(board_regdate,'YYYY-MM-DD') AS today
-          		      ,board_hit
-          		      ,rownum as num
+          		SELECT BOARD_NO
+          			  ,BOARD_EMAIL
+          		      ,BOARD_SUBJECT
+          		      ,BOARD_CONTENT
+          		      ,TO_CHAR(BOARD_REGDATE,'YYYY-MM-DD') AS TODAY
+          		      ,BOARD_HIT
+          		      ,ROWNUM AS NUM
             	  FROM (
-            	  		SELECT board_no
-            	  		 	  ,board_name
-            	  		      ,board_subject
-            	  		      ,board_content
-            	  		      ,board_regdate
-            	  		      ,board_hit 
-                          FROM board 
-                         ORDER BY board_regdate DESC
+            	  		SELECT BOARD_NO
+            	  		 	  ,BOARD_EMAIL
+            	  		      ,BOARD_SUBJECT
+            	  		      ,BOARD_CONTENT
+            	  		      ,BOARD_REGDATE
+            	  		      ,BOARD_HIT
+                          FROM BOARD 
+                         ORDER BY BOARD_REGDATE DESC
                         ) 
                )
-         WHERE num BETWEEN #{ start } AND #{ end }
+         WHERE NUM BETWEEN #{ start } AND #{ end }
 	</select>
 	
+	<!-- 상세보기 -->
+	<update id="boardCntHit" parameterType="java.lang.Integer">
+		UPDATE BOARD SET BOARD_HIT = #{board_hit} + 1
+	</update>
 	<select id="boardDetail" resultType="exam.board.BoardDTO" parameterType="java.lang.Integer">
 		SELECT * FROM BOARD WHERE BOARD_NO = #{ board_no }
 	</select>
+	
+	<!-- 게시판 업데이트 -->
+	<insert id="boardInsert_ok" parameterType="java.lang.String" >
+		INSERT INTO BOARD
+			(
+				BOARD_NO
+			   ,BOARD_SUBJECT
+			   ,BOARD_CONTENT
+			   ,BOARD_REGDATE
+			   ,BOARD_EMAIL
+			) VALUES (
+			   BOARD_SEQ.NEXTVAL
+			  ,#{board_subject}
+			  ,#{board_content}
+			  ,SYSDATE
+			  ,#{board_email}	
+			)
+	</insert>
+	<!-- 삭젠 -->
+	<delete id="boardDelete">
+		DELETE FROM BOARD BOARD_NO = #{BOARD_NO}	
+	</delete>
 </mapper>

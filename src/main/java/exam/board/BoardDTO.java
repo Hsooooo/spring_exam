@@ -9,13 +9,14 @@ public class BoardDTO {
 	private Date board_regdate;
 	private int board_hit;
 	private String today;
-	private String board_name;
+	private String board_email;
 	
-	public String getBoard_name() {
-		return board_name;
+
+	public String getBoard_email() {
+		return board_email;
 	}
-	public void setBoard_name(String board_name) {
-		this.board_name = board_name;
+	public void setBoard_email(String board_email) {
+		this.board_email = board_email;
 	}
 	public String getToday() {
 		return today;
@@ -60,6 +61,12 @@ public class BoardDTO {
 	}
 	public void setBoard_hit(int board_hit) {
 		this.board_hit = board_hit;
+	}
+	@Override
+	public String toString() {
+		return "BoardDTO [board_no=" + board_no + ", board_subject=" + board_subject + ", board_content="
+				+ board_content + ", board_regdate=" + board_regdate + ", board_hit=" + board_hit + ", today=" + today
+				+ ", board_email=" + board_email + ", num=" + num + "]";
 	}
 	
 	

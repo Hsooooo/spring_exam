@@ -6,6 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+function belogin(){
+	if(confirm("로그인 후 사용가능합니다. 이동합니다.")){
+		location.href="/login.do";
+		
+	}
+}
+</script>
 </head>
 <body>
         <!-- Begin Page Content -->
@@ -43,9 +52,16 @@
               					<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
               				</label>
               			</div>
-              			<div class="col-sm-12 col-md-12">
-            				<a href="/board_insert.do" aria-controls="dataTable" data-dt-idx="12" tabindex="0" class="page-link">쓰기</a>
-              			</div>
+              			<c:if test="${sessionScope.email == null  }">
+	              			<div class="col-sm-12 col-md-12">
+	            				<a href="#" onclick="belogin();" aria-controls="dataTable" data-dt-idx="12" tabindex="0" class="page-link">쓰기</a>
+	              			</div>
+              			</c:if>
+              			<c:if test="${sessionScope.email != null  }">
+	              			<div class="col-sm-12 col-md-12">
+	            				<a href="/board_insert.do" aria-controls="dataTable" data-dt-idx="12" tabindex="0" class="page-link">쓰기</a>
+	              			</div>
+              			</c:if>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -61,7 +77,7 @@
                     <tr>
                     	<td class="text-center" width="10%"><a href="/board_detail.do?no=${list.board_no }">${list.num }</a></td>
                     	<td><a href="/board_detail.do?no=${list.board_no }">${list.board_subject }</a></td>
-                    	<td><a href="/board_detail.do?no=${list.board_no }">${list.board_name }</a></td>
+                    	<td><a href="/board_detail.do?no=${list.board_no }">${list.board_email }</a></td>
                     	<td><a href="/board_detail.do">${list.today }</a></td>
                     	<td><a href="/board_detail.do">${list.board_hit }</a></td>
                     </tr>

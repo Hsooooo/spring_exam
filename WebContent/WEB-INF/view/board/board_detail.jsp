@@ -6,6 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+/* function del(no){
+	if(confirm("글이 삭제됩니다.")){
+		location.href="board_delete.do?dno="+no;
+	}
+} */
+$(function(){
+	$('#delBtn').click(function(){
+		var no = $('#no').text;
+		alert("여기와?"+no);
+	});
+});
+</script>
 </head>
 <body>
         <!-- Begin Page Content -->
@@ -24,7 +38,7 @@
               	<div id="dataTable_wrpper" class="dataTables_wrapper dt-bootstrap4">
               		<div class="row">
               				<div class="container">
-								<h2 class="text-center" style="padding: 2ex;">${list.board_name }의 작성 글 </h2>
+								<h2 class="text-center" style="padding: 2ex;">${list.board_email }의 작성 글 </h2>
 									<div class="row">
 										<div style="height: auto; width: 100%; border:2px solid blue;">
 										<table class="table">
@@ -48,12 +62,11 @@
 										<table class="table">
 											<tr>
 									          <td colspan="2" class="text-right">
-										          <c:if test="${vo.id==id }">
 										            <a href="noticeboard_update.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-info">수정</a>
-										            <input type="button" class="btn btn-sm btn-danger" onclick="del()" value="삭제">
-										            <input type="hidden" name="no" value="${list.board_no }" id="no">
-										          </c:if>
-									            <a href="/main.do" class="btn btn-sm btn-info">목록</a>
+										            <!-- <input type="button" class="btn btn-sm btn-danger" onclick="del('${list.board_no }')" value="삭제"> -->
+											        	 <input type="button" class="btn btn-sm btn-danger" onclick="/boardDelete.do" value="삭제" id="delBtn">
+										            	 <input type="hidden" name="no" value="${list.board_no }" id="no">
+										            <a href="/main.do" class="btn btn-sm btn-info">목록</a>
 									          </td>
 									        </tr>
 									     </table>

@@ -19,4 +19,14 @@ public class BoardDAO {
 	public BoardDTO boardDetail(int board_no) {
 		return sqlSession.selectOne("boardDetail", board_no);
 	}
+	
+	public int boardInsert_ok(BoardDTO boarddto) {
+		return (Integer)sqlSession.insert("boardInsert_ok", boarddto);
+	}
+	
+	//삭제
+	public int boardDelete(int board_no) {
+		return sqlSession.delete("boardDelete", board_no);
+	}
+	
 }

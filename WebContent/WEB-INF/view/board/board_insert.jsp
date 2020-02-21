@@ -36,6 +36,8 @@
 						<th class="text-right info" width="20%">글쓴이</th>
 						<td width="80%" class="text-left">
 							<input type="text" size="25" class="input-sm" value="${email }" placeholder=" ${email }" readonly="readonly" id="email" name="email">
+							<p>&#x1F601;</p>
+							</input>
 						</td>
 					</tr>
 					<tr>
@@ -47,7 +49,7 @@
 					<tr>
 					<th class="text-right info" width="20%">내용</th>
 						<td width="80%">
-							<textarea rows="20" cols="105" name="content" id="cont" ></textarea>
+							<textarea rows="20" cols="105" name="content" id="cont" >dkdkdkdkdk&#x1F601;</textarea>
 						</td>
 					</tr>
 					<tr>

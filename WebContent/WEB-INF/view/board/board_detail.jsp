@@ -8,18 +8,22 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-/* function del(no){
-	if(confirm("글이 삭제됩니다.")){
-		location.href="board_delete.do?dno="+no;
-	}
-} */
 $(function(){
 	$('#delBtn').click(function(){
-		var no = $('#no').text;
-		alert("여기와?"+no);
+		var board_no = $('#no').val();
+		alert(board_no);
+		
+		$.ajax({
+			type:'post',
+			url:'/boardDelete.do',
+			data:{board_no:board_no},
+			success:function(res){
+				location.href='/main.do';
+			}
+		})
 	});
 });
-</script>
+</script> 
 </head>
 <body>
         <!-- Begin Page Content -->
@@ -62,9 +66,9 @@ $(function(){
 										<table class="table">
 											<tr>
 									          <td colspan="2" class="text-right">
-										            <a href="noticeboard_update.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-info">수정</a>
+										            <a href="${list.board_no }" class="btn btn-sm btn-info">수정</a>
 										            <!-- <input type="button" class="btn btn-sm btn-danger" onclick="del('${list.board_no }')" value="삭제"> -->
-											        	 <input type="button" class="btn btn-sm btn-danger" onclick="/boardDelete.do" value="삭제" id="delBtn">
+											        	 <input type="button" class="btn btn-sm btn-danger"  value="삭제" id="delBtn">
 										            	 <input type="hidden" name="no" value="${list.board_no }" id="no">
 										            <a href="/main.do" class="btn btn-sm btn-info">목록</a>
 									          </td>

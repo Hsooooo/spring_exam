@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.qos.logback.core.pattern.parser.Parser;
 
@@ -38,7 +39,6 @@ public class BoardController {
 		session.getAttribute(email);
 		
 		//log.info("이메일 누구꺼냐 ? "+email);
-		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../board/board_detail.jsp");
@@ -97,7 +97,7 @@ public class BoardController {
 		model.addAttribute("main_jsp", "../board/board_list.jsp");
 		return "main/main";
 	}
-	
+	//하기귀찮다..ㅜㅠㅜ
 	@RequestMapping("/board_update.do")
 	public String boardUpdate() {
 		
@@ -105,8 +105,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardDelete.do")
+	@ResponseBody
 	public String boardDelete(HttpServletRequest request,Model model) {
-		String board_no = request.getParameter("no");
+		String board_no = request.getParameter("board_no");
 		
 		log.info("##########"+board_no);
 		
@@ -119,8 +120,7 @@ public class BoardController {
 			log.info("============= 정상처리완료 ========");
 		}
 		
-		model.addAttribute("main_jsp", "../board/board_list.jsp");
-		return "main/main";
+		return board_no;
 	}
 
 }

@@ -22,6 +22,7 @@ public class BoardService {
 	}
 	//상세보기
 	public BoardDTO boardDetail(int board_no) {
+			   boardDao.boardCntHit(board_no);
 		return boardDao.boardDetail(board_no);
 	}
 	//게시판글추가

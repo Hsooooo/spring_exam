@@ -16,10 +16,14 @@ public class BoardDAO {
 		return sqlSession.selectList("boardList", paramMap);
 	}
 	
+	public void boardCntHit(int board_no) {
+		sqlSession.update("boardCntHit", board_no);
+	}
+	//상세보기
 	public BoardDTO boardDetail(int board_no) {
 		return sqlSession.selectOne("boardDetail", board_no);
 	}
-	
+	//글추가
 	public int boardInsert_ok(BoardDTO boarddto) {
 		return (Integer)sqlSession.insert("boardInsert_ok", boarddto);
 	}

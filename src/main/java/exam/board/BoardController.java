@@ -33,13 +33,22 @@ public class BoardController {
 		String email = "";
 		int board_no = (Integer.parseInt(request.getParameter("no")));
 		//log.info("게시물번호 들어오니? "+board_no);
-		BoardDTO list = boardService.boardDetail(board_no);
 		
 		HttpSession session = request.getSession();
 		session.getAttribute(email);
+		BoardDTO       list = boardService.boardDetail(board_no);
 		
-		//log.info("이메일 누구꺼냐 ? "+email);
-		
+/*		int      cnt = 0;
+				 cnt = boardService.boardCntHit(board_no);*/
+				 
+/*        if((cnt == 0) || cnt > 1) {
+        	log.info("===================[힛뜨 실패]");
+        }else {
+       	 	log.info("=========[ 성공~ ]");
+        }*/
+        
+	    
+	    
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../board/board_detail.jsp");
 		return "main/main";

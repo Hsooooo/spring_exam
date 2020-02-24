@@ -8,22 +8,18 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$('#insertBtn').click(function(){
-		//alert("넌클릭이됬니?");
-		var subject = $('#sub').val();
-		var content = $('#cont').val();
-		$.ajax({
-			type:'post',
-			url:'/board_insert_ok.do',
-			data:{subject:subject,content:content},
-			success:function(res){
-				
-				location.href='/main.do';	
-			}				
-		});
-	});
-}); */
+function showEmojiCode() {
+	for(int i=1; i<4; i++){
+		var eCode = document.getElementById('emojiBtn'+i).value;	
+	}
+	alert(eCode);
+	
+	var hex = eCode.codePointAt(0).toString(16); // 문자
+	var emo = String.fromCodePoint("0x"+hex);    // 이모지
+	
+	document.getElementById('cont').value= document.getElementById('cont').value + "&#x"+hex+";";
+
+}
 </script>
 </head>
 <body>
@@ -36,7 +32,6 @@
 						<th class="text-right info" width="20%">글쓴이</th>
 						<td width="80%" class="text-left">
 							<input type="text" size="25" class="input-sm" value="${email }" placeholder=" ${email }" readonly="readonly" id="email" name="email">
-							<p>&#x1F601;</p>
 							</input>
 						</td>
 					</tr>
@@ -44,12 +39,24 @@
 					<th class="text-right info" width="20%">제목</th>
 						<td width="80%" class="text-left">
 							<input type="text" name="subject" size="60" class="input-sm" id="sub" name="subject">
+							<input type="button" value="Show_Emoji" class="btn btn-sm btn-primary" id="show" onclick="showEmojiCode();">
+						</td>
+					</tr>
+					<th class="text-right info" width="20%"></th>
+						<td width="80%" class="text-left">
+							<table>
+								<div id="box">
+									<input type="button" value="&#x1F601;" id="emojiBtn1" onclick="showEmojiCode();">
+									<input type="button" value="&#x1F602;" id="emojiBtn2" onclick="showEmojiCode();">
+									<input type="button" value="&#x1F603;" id="emojiBtn3" onclick="showEmojiCode();">
+								</div>								
+							</table>
 						</td>
 					</tr>
 					<tr>
 					<th class="text-right info" width="20%">내용</th>
 						<td width="80%">
-							<textarea rows="20" cols="105" name="content" id="cont" >dkdkdkdkdk&#x1F601;</textarea>
+							<textarea rows="20" cols="105" name="content" id="cont" ></textarea>
 						</td>
 					</tr>
 					<tr>

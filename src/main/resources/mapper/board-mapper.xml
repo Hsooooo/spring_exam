@@ -38,7 +38,9 @@
 	
 	<!-- 상세보기 -->
 	<update id="boardCntHit" parameterType="java.lang.Integer">
-		UPDATE BOARD SET BOARD_HIT = #{board_hit} + 1
+		UPDATE BOARD 
+		   SET BOARD_HIT = BOARD_HIT + 1
+		 WHERE BOARD_NO = #{board_no}
 	</update>
 	<select id="boardDetail" resultType="exam.board.BoardDTO" parameterType="java.lang.Integer">
 		SELECT * FROM BOARD WHERE BOARD_NO = #{ board_no }

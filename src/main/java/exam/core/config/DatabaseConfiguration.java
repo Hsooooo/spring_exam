@@ -27,7 +27,7 @@ public class DatabaseConfiguration {
 		DriverManagerDataSource source = new DriverManagerDataSource();
 		source.setDriverClassName(env.getProperty("driver"));
 		source.setUrl(env.getProperty("url"));
-		source.setUsername("admin");
+		source.setUsername("spring_test");
 		source.setPassword(env.getProperty("password"));
 		
 		return source;
